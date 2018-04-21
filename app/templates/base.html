@@ -1,0 +1,19 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Cityhunt</title>
+        {% else %}
+        <title>Welcome to Cityhunt</title>
+        {% endif %}
+    </head>
+    <body>
+        <div><a href="{{ url_for('index') }}">Home</a></div>
+        <div><a href="{{ url_for('map') }}">Your location</a></div>
+        <div><a href="{{ url_for('upload') }}">Upload</a></div>
+        <hr>
+
+        <!-- Here a block is inserted from a file that extends this one -->
+        {% block content %}{% endblock %}
+        <!---->
+    </body>
+</html>
