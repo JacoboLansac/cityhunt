@@ -5,8 +5,11 @@ import os
 from google.cloud import vision
 from google.cloud.vision import types
 
+import http.client, urllib.request, urllib.parse, urllib.error, base64
+import json
 
-class ImageAnnotator:
+
+class MonumentIdentifier:
     def __init__(self, keypath=None):
         if keypath is None:
             cw = os.getcwd()
@@ -16,7 +19,7 @@ class ImageAnnotator:
         self.client = vision.ImageAnnotatorClient()
 
 
-    def get_landmark(self, image_url):
+    def get_landmark(self, image_name):
 
         # The name of the image file to annotate
         file_name = os.path.join(os.path.dirname(__file__), image_name)
@@ -30,6 +33,56 @@ class ImageAnnotator:
         response = self.client.landmark_detection(image=image)
         landmarks = response.landmark_annotations
         return [landmark.description for landmark in landmarks]
+        # return landmarks
+
+
+class EmotionRecognition:
+    def __init__(self):
+        pass
+
+    def get_emotions(image_url=""):
+        headers = {
+            # Request headers
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key': '7cef923318814299bf3efb87d7ba809a',
+        }
+
+        params = urllib.parse.urlencode({
+            # Request parameters
+            'returnFaceId': 'false',
+            'returnFaceLandmarks': 'false',
+            'returnFaceAttributes': 'age,emotion'
+        })
+
+        body = json.dumps({
+            "url": image_url
+        })
+
+        try:
+            conn = http.client.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
+
+            print( "Obtaining response...")
+            conn.request("POST", "/face/v1.0/detect?%s" % params, body, headers)
+            response = conn.getresponse()
+
+            data = response.read()
+            conn.close()
+        except Exception as e:
+            print("[Errno {0}] {1}".format(e.errno, e.strerror))
+
+
+        data = data.decode("utf-8")
+        print("Data loaded")
+        list_emotions = []
+        Npeople = len(json.loads(data))
+
+        for i in range(Npeople):
+            data_json = json.loads(data)[i]
+            list_emotions.append(data_json["faceAttributes"]["emotion"])
+
+        return list_emotions
+
+
 
 
 
@@ -42,13 +95,25 @@ if __name__ == '__main__':
     client = vision.ImageAnnotatorClient()
 
     response = client.annotate_image({
-    'image': {'source': {'image_uri': 'gs://my-test-bucket/image.jpg'}},
-    ...
-    'features': [{'type': vision.enums.Feature.Type.FACE_DETECTION}],
-    ...})
-    # Performs label detection on the image file
-    # response = client.label_detection(image=image)
-    # labels = response.label_annotations
-    # print('Labels:')
-    # for label in labels:
-    #     print(label.description)
+    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg'}},
+    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
+    })
+    print(response)
+
+
+    response = client.annotate_image({
+    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg?raw=true'}},
+    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
+    })
+    print(response)
+
+    response = client.annotate_image({
+    'image': {'source': {'image_uri': 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'}},
+    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
+    })
+    print(response)
+
+
+    landmarks = response.landmark_annotations
+    [landmark.description for landmark in landmarks]
+
