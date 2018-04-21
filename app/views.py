@@ -1,7 +1,8 @@
 import flask
 from flask import render_template
 from app import app
-from app.ImageAnnotator import ImageAnnotator
+from app.ImageAnnotator import MonumentIdentifier
+from app.ImageAnnotator import EmotionRecognition
 import request
 #===================================================================================
 from flask import Flask, render_template, request
@@ -21,17 +22,29 @@ def index():
                            user=user,
                            title='Home')
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
+@app.route('/upload-static', methods=['GET', 'POST'])
+def upload_static():
     if request.method == 'POST' and 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
+        outputname = photos.save(request.files['photo'])
+        filename = '../static/img/' + outputname
 
-        # imm = ImageAnnotator()
-        # landmarks = imm.get_landmark(filename)
-        # print(landmarks)
+        imm = MonumentIdentifier()
+        landmarks = imm.get_landmark(filename)
+        print(landmarks)
+        return flask.jsonify(landmarks)
 
-        return filename
-    return render_template('upload.html')
+    return render_template('upload_static.html')
+
+
+
+@app.route('/upload-url', methods=['GET','POST'])
+def upload_url():
+
+    im_url = 'http://media1.s-nbcnews.com/i/streams/2014/August/140827/1D274906654926-today-guard-140827.jpg'
+    EmotionRecognition.get_emotions()
+
+    return render_template('upload_url.html')
+
 
 
 @app.route('/map')
