@@ -56,10 +56,10 @@ def get_emotions(image_url=""):
     try:
         conn = http.client.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
         print( "Obtaining response...")
+
         conn.request("POST", "/face/v1.0/detect?%s" % params, body, headers)
         response = conn.getresponse()
-
-        response.read()
+        dataread = response.read()
 
         data = response.read()
         conn.close()
@@ -68,7 +68,8 @@ def get_emotions(image_url=""):
 
 
 
-    jsondata = json.loads(data.decode('utf-8')[1:-1])
+    jsondata = dict(json.loads(str(dataread.decode('utf-8'))[1:-1]))
+    # jsondata = json.loads(data.decode('utf-8')[1:-1])
     emotions = jsondata['faceAttributes']['emotion']
 
 
@@ -100,6 +101,8 @@ if __name__ == '__main__':
 
     image_url = 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'
     get_landmark()
+
+
 
 
     cw = os.getcwd()

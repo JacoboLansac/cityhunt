@@ -34,6 +34,20 @@ def index():
         print("request.form -- monument")
         results = get_landmark(request.form['monument'])
         print(results)
+
+        # for
+
+        if any(item.lower() in results.landmarks for item in ['little', 'mermaid']):
+            results.little_mermaid = results.landmarks
+
+        elif any(item.lower() in results.landmarks for item in ['opera']):
+            results.opera = results.landmarks
+
+        elif any(item.lower() in results.landmarks for item in ['frederik', 'church']):
+                    results.opera = results.landmarks
+
+
+
         return render_template('index.html',
                         results=results,
                         title='Home',
@@ -45,12 +59,25 @@ def index():
         print("request.form -- face")
         results = get_emotions(request.form['face'])
         print(results)
+        max_em = 'happiness'
+        max_val = 0
+        for em,val in results['emotions'].items():
+            if val > max_val:
+                max_em = em
+                max_val = val
+
+        if max_em == 'happiness':
+            success = False
+        else:
+            success = True
+
         return render_template('index.html',
                         results=results,
                         title='Home',
                         titulito='Face results',
                         content='SUCCESS!',
-                        imageurl=request.form['face'])
+                        imageurl=request.form['face'],
+                        success=success)
 
     else:
         print("None request done yet")
