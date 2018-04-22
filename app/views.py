@@ -56,8 +56,6 @@ def index():
         return render_template('index.html',
                         results=results,
                         title='Home',
-                        titulito='Monument results',
-                        content='SUCCESS!',
                         imageurl=request.form['monument'])
 
     elif 'face' in request.form:
@@ -70,15 +68,13 @@ def index():
             if val > max_val:
                 max_em = em
                 max_val = val
-        if max_em != 'happiness':
+        if max_em == 'happiness':
             results['amalienborg'] = True
             results['last_result'] = 'amalienborg'
 
         return render_template('index.html',
                         results=results,
                         title='Home',
-                        titulito='Face results',
-                        content='SUCCESS!',
                         imageurl=request.form['face'])
 
     else:

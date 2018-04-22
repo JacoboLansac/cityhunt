@@ -109,9 +109,12 @@ ul{
 
 
                 {% if results.last_result %}
-                 <h2 id="contentTitle" class="w3-lobster">Congratulations! The answer was correct</h2>
+                <h2 id="contentTitle" class="w3-lobster">Congratulations! The answer was correct</h2>
                 <div id="content">
 					<p>Congratulations! The answer was correct</p>
+                    <div> Found labels: {{ results }}</div>
+                    <img src="{{ imageurl }}" alt="loaded image from url!" width="300"/>
+
 				</div>
 
                 {% else %}
