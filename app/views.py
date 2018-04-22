@@ -15,38 +15,43 @@ app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
 configure_uploads(app, photos)
 
 
-challenges = {'challenge1':False,
-              'challenge2':False,
-              'challenge3':False,
-              'challenge4':False,
-              'challenge5':False,
-              'challenge6':False,
-              'challenge7':False,
-              'challenge8':False,
-              }
+# challenges = {'challenge1':False,
+#               'challenge2':False,
+#               'challenge3':False,
+#               'challenge4':False,
+#               'challenge5':False,
+#               'challenge6':False,
+#               'challenge7':False,
+#               'challenge8':False,
+#               }
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/index', methods=['GET','POST'])
 def index():
 
+    results = {}
 
     if 'monument' in request.form:
         print("request.form -- monument")
         results = get_landmark(request.form['monument'])
         print(results)
 
-        # for
+        words = ' '.join(results['landmarks']).lower().split(' ')
 
-        if any(item.lower() in results.landmarks for item in ['little', 'mermaid']):
-            results.little_mermaid = results.landmarks
+        if any(['opera' in word for word in words]) and any(['denmark' in word for word in words]):
+            results['opera'] = True
+            results['last_result'] = 'opera'
+            print('Opera Success')
 
-        elif any(item.lower() in results.landmarks for item in ['opera']):
-            results.opera = results.landmarks
+        if any(['little' in word for word in words]) and any(['mermaid' in word for word in words]):
+            results['mermaid'] = True
+            results['last_result'] = 'mermaid'
+            print('Mermaid Success')
 
-        elif any(item.lower() in results.landmarks for item in ['frederik', 'church']):
-                    results.opera = results.landmarks
-
-
+        if any(['frederik' in word for word in words]):
+            results['frederik'] = True
+            results['last_result'] = 'frederik'
+            print('Frederik Success')
 
         return render_template('index.html',
                         results=results,
@@ -65,25 +70,23 @@ def index():
             if val > max_val:
                 max_em = em
                 max_val = val
-
-        if max_em == 'happiness':
-            success = False
-        else:
-            success = True
+        if max_em != 'happiness':
+            results['amalienborg'] = True
+            results['last_result'] = 'amalienborg'
 
         return render_template('index.html',
                         results=results,
                         title='Home',
                         titulito='Face results',
                         content='SUCCESS!',
-                        imageurl=request.form['face'],
-                        success=success)
+                        imageurl=request.form['face'])
 
     else:
         print("None request done yet")
 
     return render_template('index.html',
                            title='Home',
+                           results=results,
                            titulito='Challenge 1',
                            content='Try to make the guards smile and take a picture of them!')
 
