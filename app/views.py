@@ -20,54 +20,54 @@ configure_uploads(app, photos)
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname':'City-Hunter'}
+    print("Rendering index...")
+    parameters = {'face_request':False,
+                  'monument_request':False}
+
     return render_template('index.html',
-                           user=user,
+                           parameters=parameters,
                            title='Home')
 
-@app.route('/upload-static', methods=['GET', 'POST'])
-def upload_static():
-    if request.method == 'POST' and 'photo' in request.files:
-        outputname = photos.save(request.files['photo'])
-        filename = '../static/img/' + outputname
 
-        landmarks = get_landmark(filename)
-        print(landmarks)
-        return flask.jsonify(landmarks)
+@app.route('/monument-form')
+def monument_form():
+    return render_template('index.html',
+                           name='monument_url')
 
-    return render_template('upload.html',
-                           action=url_for('upload_static'))
+@app.route('/face-form')
+def face_form():
+    return render_template('index.html',
+                           name='face_url')
 
 
-# @app.route('/upload-url', methods=['GET','POST'])
-# def upload_url():
-#     im_url = 'http://media1.s-nbcnews.com/i/streams/2014/August/140827/1D274906654926-today-guard-140827.jpg'
-#     EmotionRecognition.get_emotions()
-#
-#     return render_template('upload.html',
-#                            action=url_for('upload_url'))
+@app.route('/monument-results', methods=['POST'])
+def monument_results():
+    recibed_url = request.form['monument_url']
+    print(recibed_url)
+
+    monument_results = get_landmark(image_url=recibed_url)
+    print(monument_results)
+
+    return render_template('index.html',
+                           title='Monument results',
+                           imageurl=recibed_url,
+                           monument_results=monument_results)
 
 
-@app.route('/form')
-def my_form():
-    return render_template('preform.html')
+@app.route('/face-results', methods=['POST'])
+def face_results():
+    recibed_url = request.form['face_url']
 
-
-@app.route('/form-monument', methods=['POST'])
-def evaluate_monument():
-    recibed_url = request.form['text']
-
-    emotions_response = get_emotions(recibed_url)
+    emotions_response = get_emotions(image_url=recibed_url)
     emotions = dict(emotions_response[0])
     series = pd.Series(emotions)
     series.sort_values(inplace=True, ascending=False)
     emotions_dict = series.to_dict()
 
-    # return emotions
-    return render_template('postform.html',
-                           title='Loaded image',
+    return render_template('index.html',
+                           title='Face results',
                            imageurl=recibed_url,
-                           emotions=emotions_dict)
+                           face_results=emotions_dict)
 
 
 @app.route('/form-face', methods=['POST'])
@@ -85,14 +85,6 @@ def evaluate_face():
                            title='Loaded image',
                            imageurl=recibed_url,
                            emotions=emotions_dict)
-
-
-
-#
-# @app.route('/map')
-# def map():
-#     return render_template('map.html',
-#                            title='Home')
 
 
 

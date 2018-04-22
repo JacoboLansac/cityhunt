@@ -8,26 +8,31 @@ import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
 
 
-def get_landmark(image_name):
+def get_landmark(image_url="", image_name=""):
 
     cw = os.getcwd()
     keypath = cw + '/jsonkey/tourkhana-1022aa40cf92.json'
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = keypath
     client = vision.ImageAnnotatorClient()
 
-    # The name of the image file to annotate
-    file_name = os.path.join(os.path.dirname(__file__), image_name)
+    if image_url:
+        response = client.annotate_image({
+            'image': {'source': {
+                'image_uri': image_url}},
+            'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
+        })
+        return {'landmarks':[item.description for item in response.landmark_annotations]}
 
-    # Loads the image into memory
-    with io.open(file_name, 'rb') as image_file:
-        content = image_file.read()
+    elif image_name:
+        file_name = os.path.join(os.path.dirname(__file__), image_name)
+        with io.open(file_name, 'rb') as image_file:
+            content = image_file.read()
 
-    image = types.Image(content=content)
+        image = types.Image(content=content)
+        response = client.landmark_detection(image=image)
+        landmarks = response.landmark_annotations
+        return {'landmarks':[landmark.description for landmark in landmarks]}
 
-    response = client.landmark_detection(image=image)
-    landmarks = response.landmark_annotations
-    return [landmark.description for landmark in landmarks]
-    # return landmarks
 
 
 def get_emotions(image_url=""):
@@ -67,7 +72,7 @@ def get_emotions(image_url=""):
         data_json = json.loads(data)[i]
         list_emotions.append(data_json["faceAttributes"]["emotion"])
 
-    return list_emotions
+    return {'emotions':list_emotions}
 
 
 
@@ -76,23 +81,18 @@ def get_emotions(image_url=""):
 
 
 if __name__ == '__main__':
+
+    image_url = 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'
+    get_landmark()
+
+
     cw = os.getcwd()
     keypath = '../jsonkey/tourkhana-1022aa40cf92.json'
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = keypath
     client = vision.ImageAnnotatorClient()
 
-    response = client.annotate_image({
-    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg'}},
-    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
-    })
-    print(response)
 
 
-    response = client.annotate_image({
-    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg?raw=true'}},
-    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
-    })
-    print(response)
 
     response = client.annotate_image({
     'image': {'source': {'image_uri': 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'}},
@@ -102,5 +102,5 @@ if __name__ == '__main__':
 
 
     landmarks = response.landmark_annotations
-    [landmark.description for landmark in landmarks]
+    {'landmarks': [landmark.description for landmark in landmarks]}
 
