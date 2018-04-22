@@ -82,19 +82,6 @@ if __name__ == '__main__':
     client = vision.ImageAnnotatorClient()
 
     response = client.annotate_image({
-    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg'}},
-    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
-    })
-    print(response)
-
-
-    response = client.annotate_image({
-    'image': {'source': {'image_uri': 'https://github.com/JacoboLansac/foo_images/blob/master/cityhunt/frederik.jpg?raw=true'}},
-    'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
-    })
-    print(response)
-
-    response = client.annotate_image({
     'image': {'source': {'image_uri': 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'}},
     'features': [{'type': vision.enums.Feature.Type.LANDMARK_DETECTION}],
     })
@@ -102,5 +89,5 @@ if __name__ == '__main__':
 
 
     landmarks = response.landmark_annotations
-    [landmark.description for landmark in landmarks]
+    {'landmarks': [landmark.description for landmark in landmarks]}
 
