@@ -35,7 +35,7 @@ body{
   padding:1%;
 }
 .topheader{
-	background-color:#F4A460;
+	background-color:#15526a;
 }
 .topheader .left{
 	width:40%;
@@ -79,12 +79,18 @@ table { width: 100%; }
 }
 
 .btn.btn-primary{
-	background-color:#1c536a;
-	color: #e56f34;
-	border-top: 5px solid #1c536a;
+	background-color:#15526a;
+	color: #daeef2;
+	border-top: 5px solid #15526a;
 	margin: auto;
 }
 
+h5{
+	padding-bottom: 20px;
+}
+form{
+	padding-bottom: 30px;
+}
 li{
     margin-top: 30px;
 }
@@ -100,11 +106,11 @@ ul{
 	<div class='content'>
 		<div class='topheader'>
 			<div class='left'><img src="CityHunt.png" alt="Mountain View" style="width:25%;"></div>
-			<div class='right' id="rojo"><h1 class="w3-lobster">Exploring the city!</h1></div>
+			<div class='right' id="rojo"><h1 class="w3-lobster" style="color:#e76f28;">Exploring the city!</h1></div>
 		</div>
 		<div class="row">
 			<div id="map"></div>
-			<div class='col'>
+			<div class='col' style="background-color: #daeef2;">
         <h2 id="contentTitle" class="w3-lobster">Welcome to the adventure!</h2>
 				<div id="content">
 					<p>In order to complete the adventure you have to follow these instructions:</p>
@@ -127,7 +133,7 @@ ul{
 				<div id="info"></div>
 			</div>
 
-			<div id="challenges" class='col'>
+			<div id="challenges" class='col' style="background-color: #daeef2;">
 				<h3 class="w3-lobster">Challenges</h3>
 				<div class="btn-group-vertical">
 				  <button id="challenge1" type="button" class="btn btn-primary">Amalienborg</button>
@@ -135,9 +141,9 @@ ul{
 					<button id="challenge3" type="button" class="btn btn-primary">Little Mermaid</button>
 					<button id="challenge4" type="button" class="btn btn-primary">Frederik’s Church</button>
 					<button id="challenge5" type="button" class="btn btn-primary">Nyhavn</button>
-					<button id="challenge6" type="button" class="btn btn-primary">Christiania</button>
+					<button id="challenge6" type="button" class="btn btn-primary">Christianshavn</button>
 					<button id="challenge7" type="button" class="btn btn-primary">Black Diamond</button>
-					<button id="challenge8" type="button" class="btn btn-primary">Christiansborg palace</button>
+					<button id="challenge8" type="button" class="btn btn-primary">Christiansborg Palace</button>
 				</div>
 			</div>
 		</div>
@@ -149,35 +155,35 @@ ul{
 				title = "<h1>Rojo</h1>"
 				challenge1title = "<h2>Challenge 1: Amalienborg</h2>"
 				challenge1text = "<h5>Try to make the guards smile and take a picture of them!</h5>"
-				challenge1congrats = "<h4>Solved!</h4><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+				challenge1congrats = "<h4>Congratulations!</h4><p> It consists of four palaces. Amalienborg became the Danish Royal Family residence in 1794 when a fire destroyed the real palace. Amalienborg is famous for its Royal Guard, called Den Kongelige Livgarde. Every day you can experience the changing of the guards, which takes place at 12.00.</p>"
 
 				challenge2title = "<h2>Challenge 2: Opera</h2>"
 				challenge2text = "<h5>Take a funny picture of you with the Opera!</h5>"
-				cchallenge2congrats = "<h4>Solved!</h4><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id estlaborum.</p>"
+				cchallenge2congrats = "<h4>Congratulations!</h4><p> The Opera is one of the best examples of modern architecture in Europe and one of the most expensive ones in the world. It was built by Henning Larsen and thanks to the donation of the multimillionaire Mark Mc-Kinney.</p>"
 
 				challenge3title = "<h2>Challenge 3: Little Mermaid</h2>"
 				challenge3text = "<h5>Take a picture of the Little Mermaid!</h5>"
-				challenge3congrats = "<h4>Solved!</h4><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+				challenge3congrats = "<h4>Congratulations!</h4><p> The little Mermaid was made in 1913 by Edvard Eriksen commissioned by Carl Jacobsen in 1909. The statue was in first place modelled after a Ballerina, but as she refused in the middle of the process, it ended up being modelled after Edvard Erikson’s wife. The little Mermaid become a focus for protest and vandalism, it has been painted, beheaded and dressed up many times.</p>"
 
 				challenge4title = "<h2>Challenge 4: Frederik’s Church</h2>"
 				challenge4text = "<h5>What is written in gold on the entrance of the church?</h5>"
-				challenge4congrats = "<h4>Solved!</h4><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+				challenge4congrats = "<h4>Congratulations!</h4><p> Commonly known as The Marble Church. This church was built to commemorate the 300 years jubilee of the first coronation of a member of the House of Oldenburg. It is the largest church dome in Scandinavia with a span of 31m.</p>"
 
 				challenge5title = "<h2>Challenge 5: Nyhavn</h2>"
 				challenge5text = "<h5> How many different colors are in the buildings?</h5>"
-				challenge5congrats = "<h4>Solved!</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>"
+				challenge5congrats = "<h4>Congratulations!</h4><p> It was excavated by Swedish war prisoners from the Swedish-Danish. At the beginning was known for its brothels, but nowadays is one of the most touristic place. Christian Andersen lived there.</p>"
 
-				challenge6title = "<h2>Challenge 6: Christiania</h2>"
+				challenge6title = "<h2>Challenge 6: Christianshavn</h2>"
 				challenge6text = "<h5> What are the 9 commons laws of Christiania?</h5>"
-				challenge6congrats = "<h4>Solved!</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>"
+				challenge6congrats = "<h4>Congratulations!</h4><p>Freetown Christiania is a green and car-free neighbourhood in Copenhagen, best known for its autonomous inhabitants’ different way of life. It was established in 1971 by a group of hippies who occupied some abandoned military barracks on the site and developed their own set of society rules, completely independent of the Danish government. It is a mix of homemade houses, workshops, art galleries, music venues, cheap and organic eateries, and beautiful nature. </p>"
 
 				challenge7title = "<h2>Challenge 7: Black Diamond</h2>"
 				challenge7text = "<h5> How large is the oil painting on the ceiling of one of the corridors?</h5>"
-				challenge7congrats = "<h4>Solved!</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>"
+				challenge7congrats = "<h4>Congratulations!</h4><p>The Royal Library in Copenhagen is the national library of Denmark and the university library of the University of Copenhagen. It is among the largest libraries in the world and the largest in the Nordic countries.</p>"
 
-				challenge8title = "<h2>Challenge 8: Christiansborg palace</h2>"
+				challenge8title = "<h2>Challenge 8: Christiansborg Palace</h2>"
 				challenge8text = "<h5> How many rocks there are in the square?</h5>"
-				challenge8congrats = "<h4>Solved!</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>"
+				challenge8congrats = "<h4>Congratulations!</h4><p>Christiansborg Palace contains the Danish Parliament Folketinget, the Supreme Court, and the Ministry of State. You can visit its tower, which is the highest tower in Copenhagen, and it offers a magnificent view of the city's rooftops. It was burned twice. Frederik V on Horseback sculpture is located in the center of Amalienborg Square.</p>"
 
 	      function initMap() {
 	        var myLatlng = {lat: 55.701, lng: 12.560};
