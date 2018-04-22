@@ -1,11 +1,9 @@
-# CITIHUNT
+# CITYHUNT
 
-## Subsection 1
+## Description
 
-This is some explanatory text about the proyect blablabla
-SADcasdcasdncæaklksdc aøsdc ads
+Interactive tourism app for exploring the cities while searching for clues and fulfilling challenges
 
 ## Another section
 
-blasblasbcjasdc this is great
-turkhana, gilipojazz
+It is free, and really cool
