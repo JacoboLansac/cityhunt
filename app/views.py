@@ -4,13 +4,11 @@ from app import app
 from app.ImageAnnotator import get_emotions
 from app.ImageAnnotator import get_landmark
 import request
-#===================================================================================
+
 from flask import Flask, render_template, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask import url_for
 import pandas as pd
-
-
 
 photos = UploadSet('photos', IMAGES)
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
