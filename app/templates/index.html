@@ -102,7 +102,7 @@ ul{
 
 </style>
 
-<body style="background-color:#FFA500;">
+<body style="background-color:#daeef2;">
 	<div class='content'>
 		<div class='topheader'>
 			<div class='left'><img src="https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/logo_orange_blue.png"  alt="Mountain View" style="width:20%;"></div>
@@ -118,7 +118,10 @@ ul{
                 <div id="content">
 					<h5 class="w3-lobster">The answer was correct</h5>
                     <div> Found labels: {{ results }}</div>
+
+                    {% if not results.frederik %}
                     <img src="{{ imageurl }}" alt="loaded image from url!" width="300"/>
+                    {% endif %}
 
 				</div>
 
@@ -145,6 +148,11 @@ ul{
 	    			<input name="face" placeholder="">
 	    			<input type="submit" class="btn btn-primary">
 					</form>
+                    </form>
+					<form id="textbox" method="POST">
+	    			<input name="textbox" placeholder="">
+	    			<input type="submit" class="btn btn-primary">
+					</form>
 				</div>
 				<div id="info"></div>
 			</div>
@@ -167,6 +175,7 @@ ul{
 <script>
 				$("#face").hide();
 				$("#monu").hide();
+				$("#textbox").hide();
 				//aqui la mandanga
 
 
@@ -242,6 +251,7 @@ ul{
 					 $("#contentTitle").html(challenge1title);
 					 $("#face").show();
 					 $("#monu").hide();
+					 $("#textbox").hide();
 
 					 {% if results.amalienborg %}
 
@@ -268,6 +278,7 @@ ul{
 					 $("#contentTitle").html(challenge2title);
 					 $("#face").hide();
 					 $("#monu").show();
+					 $("#textbox").hide();
 
 					 {% if results.opera %}
     		 	 $("#info").html(challenge2congrats);
@@ -291,6 +302,7 @@ ul{
 					 $("#contentTitle").html(challenge3title);
 					 $("#face").hide();
 					 $("#monu").show();
+					 $("#textbox").hide();
 
 					 {% if results.mermaid %}
     		 	 $("#info").html(challenge3congrats);
@@ -315,6 +327,7 @@ ul{
 					 $("#contentTitle").html(challenge4title);
 					 $("#face").hide();
 					 $("#monu").hide();
+					 $("#textbox").show();
 
 					 {% if results.frederik %}
     		 	 $("#info").html(challenge4congrats);
@@ -338,6 +351,7 @@ ul{
 					 $("#contentTitle").html(challenge5title);
 					 $("#face").hide();
 					 $("#monu").hide();
+					 $("#textbox").hide();
 
 					 {% if results.nyhavn %}
 
@@ -361,6 +375,7 @@ ul{
 					 $("#contentTitle").html(challenge6title);
 					 $("#face").hide();
 					 $("#monu").hide();
+					 $("#textbox").hide();
 
                  {% if results.christianshavn %}
 
@@ -385,6 +400,7 @@ ul{
 					 $("#contentTitle").html(challenge7title);
 					 $("#face").hide();
 					 $("#monu").hide();
+					 $("#textbox").hide();
 
                  {% if results.blackdiamond %}
 
@@ -409,6 +425,7 @@ ul{
 					 $("#contentTitle").html(challenge8title);
 					 $("#face").hide();
 					 $("#monu").hide();
+					 $("#textbox").hide();
 
 
                   {% if results.christianborg %}

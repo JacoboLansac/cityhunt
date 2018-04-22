@@ -48,11 +48,6 @@ def index():
             results['last_result'] = 'mermaid'
             print('Mermaid Success')
 
-        if any(['frederik' in word for word in words]):
-            results['frederik'] = True
-            results['last_result'] = 'frederik'
-            print('Frederik Success')
-
         return render_template('index.html',
                         results=results,
                         title='Home',
@@ -77,6 +72,19 @@ def index():
                         title='Home',
                         imageurl=request.form['face'])
 
+    elif 'textbox' in request.form:
+        print("request.form -- textbox")
+
+        true_sentence = 'Herrens ord bliver evindelig'
+        if request.form['textbox'].lower() == true_sentence.lower():
+            print('Textbox Success')
+            results['frederik'] = 'Success'
+            results['last_result'] = 'frederik'
+
+        return render_template('index.html',
+                        results=results,
+                        title='Home',
+                        imageurl=request.form['textbox'])
 
 
     else:
