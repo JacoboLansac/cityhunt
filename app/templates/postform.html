@@ -1,0 +1,21 @@
+<!-- Extends from base.html layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div> Detected emotions: </div>
+        {{ emotions }}
+        <!--<ul> emotions.happiness </ul>-->
+        <!--<ul> emotions.sadness </ul>-->
+        <!--<ul> emotions.fear </ul>-->
+        <!--<ul> emotions.anger </ul>-->
+        <!--<ul> emotions.neutral </ul>-->
+        <!--<ul> emotions.disgust </ul>-->
+    <!--{{ emotions.keys() }}-->
+
+    <!--{% for key in emotions.keys() %}-->
+    <!--<ul>-->
+        <!--<li> emotions.key </li>-->
+    <!--</ul>-->
+    <!--{% endfor %}-->
+    <br>
+    <img src="{{ imageurl }}" alt="loaded image from url!" width="300"/>
+{% endblock %}

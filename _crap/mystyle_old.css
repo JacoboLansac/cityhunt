@@ -1,24 +1,14 @@
 #map {
- height: 580px;
- width: 40%;
-}
-button {
-    display: block;
+ height: 400px;
+ width: 50%;
 }
 body{
 	font-family: 'Roboto', sans-serif;
-	background-color:#EEE8AA;
+	background-color:#eeeeee;
 	overflow-y: scroll;
-  height: 100%;
-}
-#challenges{
-  margin-right: -15em;
-}
-.bar{
-  padding:1%;
 }
 .topheader{
-	background-color:#F4A460;
+	border-bottom: double;
 }
 .topheader .left{
 	width:50%;
@@ -52,6 +42,15 @@ body{
 }
 table { width: 100%; }
 .content{
+	margin:auto;
+	display:flex;
+	width:60%;
+	background-color:#fff;
+	color:#333;
+	flex-flow:column;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	padding:20px;
+	border-radius: 5px;
 }
 .container{
 	width:100%;

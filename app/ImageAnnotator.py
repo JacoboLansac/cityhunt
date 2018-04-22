@@ -4,83 +4,70 @@ import os
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
-
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
 
 
-class MonumentIdentifier:
-    def __init__(self, keypath=None):
-        if keypath is None:
-            cw = os.getcwd()
-            keypath = cw + '/jsonkey/tourkhana-1022aa40cf92.json'
+def get_landmark(image_name):
 
-        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = keypath
-        self.client = vision.ImageAnnotatorClient()
+    cw = os.getcwd()
+    keypath = cw + '/jsonkey/tourkhana-1022aa40cf92.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = keypath
+    client = vision.ImageAnnotatorClient()
 
+    # The name of the image file to annotate
+    file_name = os.path.join(os.path.dirname(__file__), image_name)
 
-    def get_landmark(self, image_name):
+    # Loads the image into memory
+    with io.open(file_name, 'rb') as image_file:
+        content = image_file.read()
 
-        # The name of the image file to annotate
-        file_name = os.path.join(os.path.dirname(__file__), image_name)
+    image = types.Image(content=content)
 
-        # Loads the image into memory
-        with io.open(file_name, 'rb') as image_file:
-            content = image_file.read()
-
-        image = types.Image(content=content)
-
-        response = self.client.landmark_detection(image=image)
-        landmarks = response.landmark_annotations
-        return [landmark.description for landmark in landmarks]
-        # return landmarks
+    response = client.landmark_detection(image=image)
+    landmarks = response.landmark_annotations
+    return [landmark.description for landmark in landmarks]
+    # return landmarks
 
 
-class EmotionRecognition:
-    def __init__(self):
-        pass
+def get_emotions(image_url=""):
+    headers = {
+        # Request headers
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': '7cef923318814299bf3efb87d7ba809a',
+    }
 
-    def get_emotions(image_url=""):
-        headers = {
-            # Request headers
-            'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key': '7cef923318814299bf3efb87d7ba809a',
-        }
+    params = urllib.parse.urlencode({
+        # Request parameters
+        'returnFaceId': 'false',
+        'returnFaceLandmarks': 'false',
+        'returnFaceAttributes': 'age,emotion'
+    })
 
-        params = urllib.parse.urlencode({
-            # Request parameters
-            'returnFaceId': 'false',
-            'returnFaceLandmarks': 'false',
-            'returnFaceAttributes': 'age,emotion'
-        })
+    body = json.dumps({
+        "url": image_url
+    })
 
-        body = json.dumps({
-            "url": image_url
-        })
+    try:
+        conn = http.client.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
+        print( "Obtaining response...")
+        conn.request("POST", "/face/v1.0/detect?%s" % params, body, headers)
+        response = conn.getresponse()
+        data = response.read()
+        conn.close()
+    except Exception as e:
+        print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
-        try:
-            conn = http.client.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
+    data = data.decode("utf-8")
+    print("Data loaded")
+    list_emotions = []
+    Npeople = len(json.loads(data))
 
-            print( "Obtaining response...")
-            conn.request("POST", "/face/v1.0/detect?%s" % params, body, headers)
-            response = conn.getresponse()
+    for i in range(Npeople):
+        data_json = json.loads(data)[i]
+        list_emotions.append(data_json["faceAttributes"]["emotion"])
 
-            data = response.read()
-            conn.close()
-        except Exception as e:
-            print("[Errno {0}] {1}".format(e.errno, e.strerror))
-
-
-        data = data.decode("utf-8")
-        print("Data loaded")
-        list_emotions = []
-        Npeople = len(json.loads(data))
-
-        for i in range(Npeople):
-            data_json = json.loads(data)[i]
-            list_emotions.append(data_json["faceAttributes"]["emotion"])
-
-        return list_emotions
+    return list_emotions
 
 
 

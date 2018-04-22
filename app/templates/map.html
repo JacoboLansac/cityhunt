@@ -81,8 +81,15 @@ ul{
 	<div>
 	<div>
 		<div class='topheader'>
-			<div class='left'><h1>Turkhana</h1></div>
+			<div class='left'><h1>CITYHUNT</h1></div>
 		</div>
+
+        <div><a class="topbutton" href="{{ url_for('index') }}">Home</a></div>
+        <div><a class="topbutton" href="{{ url_for('map') }}">Your location</a></div>
+        <div><a class="topbutton" href="{{ url_for('upload_static') }}">Upload monument</a></div>
+        <div><a class="lasttopbutton" href="{{ url_for('my_form_post') }}">Upload face</a></div>
+        <hr>
+
 		<div class="row">
 			<div id="map"></div>
 			<div class='col'>
