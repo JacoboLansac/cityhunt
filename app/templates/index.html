@@ -88,24 +88,37 @@ ul{
 		<div class="row">
 			<div id="map"></div>
 			<div class='col'>
-        <h2 id="contentTitle">Challenge 1</h2>
-				<div id="content"><p>Try to make the guards smile and take a picture of them!</p></div>
-				<div id="upload">
-					<form id="monu" method="POST">
-	    			<input name="monument" placeholder="">
-	    			<input type="submit">
-					</form>
-					<form id="face" method="POST">
-	    			<input name="face" placeholder="">
-	    			<input type="submit">
-					</form>
-				</div>
-				<div id="info"></div>
+
+        <h2 id="contentTitle"> {{ titulito }} </h2>
+                <div id="content"><p> {{ content }} </p></div>
+
+                {% if results %}
+                    <div><p>{{ results.landmarks }}</p></div>
+                    <img src="{{ imageurl }}" alt="loaded image from url!" width="300"/>
+
+
+                {% else %}
+                    <div id="upload">
+                        <form id="monu" method="POST">
+                        <input name="monument" placeholder="">
+                        <input type="submit">
+                        </form>
+
+                        <form id="face" method="POST">
+                        <input name="face" placeholder="">
+                        <input type="submit">
+                        </form>
+                    </div>
+
+                    <div id="info"></div>
+
+                {% endif %}
+
 			</div>
 
 			<div id="challenges" class='col'>
 				<div class="btn-group-vertical">
-				  <button id="challenge1" type="button" class="btn btn-primary">Amalienborg</button>
+				    <button id="challenge1" type="button" class="btn btn-primary">Amalienborg</button>
 					<button id="challenge2" type="button" class="btn btn-primary">Opera</button>
 					<button id="challenge3" type="button" class="btn btn-primary">Little Mermaid</button>
 					<button id="challenge4" type="button" class="btn btn-primary">Frederik’s Church</button>

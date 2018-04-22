@@ -58,21 +58,32 @@ def get_emotions(image_url=""):
         print( "Obtaining response...")
         conn.request("POST", "/face/v1.0/detect?%s" % params, body, headers)
         response = conn.getresponse()
+
+        response.read()
+
         data = response.read()
         conn.close()
     except Exception as e:
         print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
-    data = data.decode("utf-8")
-    print("Data loaded")
-    list_emotions = []
-    Npeople = len(json.loads(data))
 
-    for i in range(Npeople):
-        data_json = json.loads(data)[i]
-        list_emotions.append(data_json["faceAttributes"]["emotion"])
 
-    return {'emotions':list_emotions}
+    jsondata = json.loads(data.decode('utf-8')[1:-1])
+    emotions = jsondata['faceAttributes']['emotion']
+
+
+    # data = data.decode("utf-8")
+    # print("Data loaded")
+    # list_emotions = []
+    # Npeople = len(json.loads(data))
+    #
+    # print(Npeople)
+    # for i in range(Npeople):
+    #     data_json = json.loads(data)[i]
+    #     list_emotions.append(data_json["faceAttributes"]["emotion"])
+
+    return {'emotions':emotions}
+
 
 
 
@@ -81,6 +92,11 @@ def get_emotions(image_url=""):
 
 
 if __name__ == '__main__':
+
+    image_url = 'http://bh-s2.azureedge.net/bh-uploads/2016/01/1098_01.jpg'
+    get_emotions(image_url=image_url)
+
+
 
     image_url = 'https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/frederik.jpg'
     get_landmark()
