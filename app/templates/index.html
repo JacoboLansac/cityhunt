@@ -85,23 +85,37 @@ ul{
 		<div class="row">
 			<div id="map"></div>
 			<div class='col'>
-        <h2 id="contentTitle">Challenge 1</h2>
+
+            <h2 id="contentTitle">Challenge 1</h2>
 				<div id="content">random</div>
-				{{result}}
 			</div>
 
             <br>
+
+            [% if parameters.monument_request %}
+
             {% if monument_results %}
             {{ monument_results }}
 
-            <!--{% elif face_results %}-->
-            <!--{{ face_results }}-->
+            {% elif face_results %}
+            {{ face_results }}
 
             {% else %}
-			<form method=POST enctype=multipart/form-data action="{{ action }}">
-			<input type=file name=photo>
-			<input type="submit">
-			</form>
+
+                {% if monument_request %}
+                <form method="POST">
+                    <input name="" placeholder="http://bh-s2.azureedge.net/bh-uploads/2016/01/1098_01.jpg">
+                    <input type="submit">
+                </form>
+
+                {% if face_request %}
+                <form method="POST">
+                    <input name="" placeholder="http://bh-s2.azureedge.net/bh-uploads/2016/01/1098_01.jpg">
+                    <input type="submit">
+                </form>
+
+
+
             <br>
 
             {% endif %}

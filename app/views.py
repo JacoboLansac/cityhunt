@@ -20,47 +20,57 @@ configure_uploads(app, photos)
 @app.route('/')
 @app.route('/index')
 def index():
+    print("Rendering index...")
+    parameters = {'face_request':False,
+                  'monument_request':False}
+
     return render_template('index.html',
-                           action=url_for('upload_static'),
+                           parameters=parameters,
                            title='Home')
 
 
+@app.route('/monument-form')
+def monument_form():
+    return render_template('index.html',
+                           name='monument_url')
 
-@app.route('/upload-static', methods=['GET', 'POST'])
-def upload_static():
-    if request.method == 'POST' and 'photo' in request.files:
-        outputname = photos.save(request.files['photo'])
-        filename = '../static/img/' + outputname
+@app.route('/face-form')
+def face_form():
+    return render_template('index.html',
+                           name='face_url')
 
-        landmarks = {'landmarks':get_landmark(filename)}
-        print(landmarks)
-        return render_template('index.html',
-                               monument_results=landmarks)
+
+@app.route('/monument-results', methods=['POST'])
+def monument_results():
+    recibed_url = request.form['monument_url']
+    print(recibed_url)
+
+    monument_results = get_landmark(image_url=recibed_url)
+    print(monument_results)
 
     return render_template('index.html',
-                           action=url_for('upload_static'))
+                           title='Monument results',
+                           imageurl=recibed_url,
+                           monument_results=monument_results)
 
 
+@app.route('/face-results', methods=['POST'])
+def face_results():
+    recibed_url = request.form['face_url']
 
-@app.route('/form')
-def my_form():
-    return render_template('preform.html')
-
-@app.route('/form', methods=['POST'])
-def my_form_post():
-    recibed_url = request.form['text']
-
-    emotions_response = get_emotions(recibed_url)
+    emotions_response = get_emotions(image_url=recibed_url)
     emotions = dict(emotions_response[0])
     series = pd.Series(emotions)
     series.sort_values(inplace=True, ascending=False)
     emotions_dict = series.to_dict()
 
-    # return emotions
-    return render_template('postform.html',
-                           title='Loaded image',
+    return render_template('index.html',
+                           title='Face results',
                            imageurl=recibed_url,
-                           emotions=emotions_dict)
+                           face_results=emotions_dict)
+
+
+
 
 
 
