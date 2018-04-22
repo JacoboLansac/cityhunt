@@ -77,6 +77,8 @@ def index():
                         title='Home',
                         imageurl=request.form['face'])
 
+
+
     else:
         print("None request done yet")
 

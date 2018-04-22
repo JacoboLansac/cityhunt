@@ -105,7 +105,7 @@ ul{
 <body style="background-color:#FFA500;">
 	<div class='content'>
 		<div class='topheader'>
-			<div class='left'><img src="CityHunt.png" alt="Mountain View" style="width:25%;"></div>
+			<div class='left'><img src="https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/logo_orange_blue.png"  alt="Mountain View" style="width:20%;"></div>
 			<div class='right' id="rojo"><h1 class="w3-lobster" style="color:#e76f28;">Exploring the city!</h1></div>
 		</div>
 		<div class="row">
@@ -114,9 +114,9 @@ ul{
 
 
             {% if results.last_result %}
-                <h2 id="contentTitle" class="w3-lobster">Congratulations! The answer was correct</h2>
+                <h2 id="contentTitle" class="w3-lobster">Congratulations! </h2>
                 <div id="content">
-					<p>Congratulations! The answer was correct</p>
+					<h5 class="w3-lobster">The answer was correct</h5>
                     <div> Found labels: {{ results }}</div>
                     <img src="{{ imageurl }}" alt="loaded image from url!" width="300"/>
 
@@ -167,6 +167,9 @@ ul{
 <script>
 				$("#face").hide();
 				$("#monu").hide();
+				//aqui la mandanga
+
+
         contador = 0;
 				title = "<h1>Rojo</h1>"
 
