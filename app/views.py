@@ -52,8 +52,9 @@ def upload_static():
 def my_form():
     return render_template('preform.html')
 
-@app.route('/form', methods=['POST'])
-def my_form_post():
+
+@app.route('/form-monument', methods=['POST'])
+def evaluate_monument():
     recibed_url = request.form['text']
 
     emotions_response = get_emotions(recibed_url)
@@ -68,10 +69,30 @@ def my_form_post():
                            imageurl=recibed_url,
                            emotions=emotions_dict)
 
-@app.route('/map')
-def map():
-    return render_template('map.html',
-                           title='Home')
+
+@app.route('/form-face', methods=['POST'])
+def evaluate_face():
+    recibed_url = request.form['text']
+
+    emotions_response = get_emotions(recibed_url)
+    emotions = dict(emotions_response[0])
+    series = pd.Series(emotions)
+    series.sort_values(inplace=True, ascending=False)
+    emotions_dict = series.to_dict()
+
+    # return emotions
+    return render_template('postform.html',
+                           title='Loaded image',
+                           imageurl=recibed_url,
+                           emotions=emotions_dict)
+
+
+
+#
+# @app.route('/map')
+# def map():
+#     return render_template('map.html',
+#                            title='Home')
 
 
 
