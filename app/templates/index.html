@@ -105,16 +105,15 @@ ul{
 <body style="background-color:#FFA500;">
 	<div class='content'>
 		<div class='topheader'>
-			<div class='left'><img src="./app/templates/CityHunt.png" alt="Mountain View" style="width:25%;"></div>
-			<div class='right' id="rojo"><h1 class="w3-lobster">Exploring the city!</h1></div>
+			<div class='left'><img src="CityHunt.png" alt="Mountain View" style="width:25%;"></div>
+			<div class='right' id="rojo"><h1 class="w3-lobster" style="color:#e76f28;">Exploring the city!</h1></div>
 		</div>
 		<div class="row">
 			<div id="map"></div>
-			<div class='col'>
+			<div class='col' style="background-color: #daeef2;">
 
 
-
-                {% if results.last_result %}
+            {% if results.last_result %}
                 <h2 id="contentTitle" class="w3-lobster">Congratulations! The answer was correct</h2>
                 <div id="content">
 					<p>Congratulations! The answer was correct</p>
@@ -125,6 +124,7 @@ ul{
 
                 {% else %}
 
+                <h2 id="contentTitle" class="w3-lobster">Welcome to the adventure!</h2>
 				<div id="content">
 					<p>In order to complete the adventure you have to follow these instructions:</p>
 					<ol>
@@ -134,7 +134,7 @@ ul{
 					</ol>
 				</div>
 
-                {% endif %}
+        {% endif %}
 
 				<div id="upload">
 					<form id="monu" method="POST">
@@ -147,13 +147,12 @@ ul{
 					</form>
 				</div>
 				<div id="info"></div>
-
 			</div>
 
 			<div id="challenges" class='col' style="background-color: #daeef2;">
 				<h3 class="w3-lobster">Challenges</h3>
 				<div class="btn-group-vertical">
-				    <button id="challenge1" type="button" class="btn btn-primary">Amalienborg</button>
+				  <button id="challenge1" type="button" class="btn btn-primary">Amalienborg</button>
 					<button id="challenge2" type="button" class="btn btn-primary">Opera</button>
 					<button id="challenge3" type="button" class="btn btn-primary">Little Mermaid</button>
 					<button id="challenge4" type="button" class="btn btn-primary">Frederik’s Church</button>
@@ -170,9 +169,9 @@ ul{
 				$("#monu").hide();
         contador = 0;
 				title = "<h1>Rojo</h1>"
-				
+
 				dummy = "<div></div>"
-				
+
 				challenge1title = "<h2>Challenge 1: Amalienborg</h2>"
 				challenge1text = "<h5>Try to make the guards smile and take a picture of them!!</h5>"
 				challenge1congrats = "<h4>Congratulations!</h4><p> It consists of four palaces. Amalienborg became the Danish Royal Family residence in 1794 when a fire destroyed the real palace. Amalienborg is famous for its Royal Guard, called Den Kongelige Livgarde. Every day you can experience the changing of the guards, which takes place at 12.00.</p>"
