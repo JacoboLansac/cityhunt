@@ -4,8 +4,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="mystyle.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/JacoboLansac/foo_images/master/cityhunt/logo_orange_blue.png"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>Arturo Arranz</title>
+	<title>Cityhunt</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 </head>
@@ -15,7 +16,7 @@
     font-family: "Lobster", serif;
 }
 #map {
- height: 580px;
+ height: 680px;
  width: 40%;
 }
 button {
@@ -254,15 +255,16 @@ ul{
 					 $("#textbox").hide();
 
 					 {% if results.amalienborg %}
-
-    		 	 $("#info").html(challenge1congrats);
-					 var marker1 = new google.maps.Marker({
-  	          position: chellenge1,
-  	          map: map,
-  	          title: 'Click to zoom'
-  	       });
-					 map.setZoom(14);
+                     var marker1 = new google.maps.Marker({
+                          position: chellenge1,
+                          map: map,
+                          title: 'Click to zoom'
+                       });
+                      map.setZoom(14);
 					 map.setCenter(marker1.getPosition());
+    		 	 $("#info").html(challenge1congrats);
+
+
 					 {% else %}
 					 
 						$("#info").html(dummy);
